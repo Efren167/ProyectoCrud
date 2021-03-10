@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+<th:block th:include="Fragments/head :: head"></th:block>
+</head>
+<body>
+	<div class="container">
+		<div th:insert="Fragments/BodyHeader :: div"></div>
+
+
+		<h3>Lista detallada</h3>
+		<form th:object="${CursoDTODetalle}" method="get"
+			th:action="@{/ListaCursos}">
+
+			<input type="hidden" th:field="*{pK_CursoId}">
+
+			<div class="form-group">
+
+				<label class="cloud-label">Curso</label> <input type="text"
+					th:field="*{nombreCurso}" disabled> <br> <label class="cloud-label">
+					Familia Profesional</label> <input type="text"
+					th:field="*{familiaProfesional}" disabled> <br>
+				
+			</div>
+			<button type="submit" class="btn btn-success">Atras</button>
+
+		</form>
+
+
+
+	</div>
+
+</body>
+</html>

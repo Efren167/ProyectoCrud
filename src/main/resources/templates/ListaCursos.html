@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+<th:block th:include="Fragments/head :: head"></th:block>
+</head>
+<body>
+	<div class="container">
+		<div th:insert="Fragments/BodyHeader :: div"></div>
+		<form th:object="${CursoDTOFiltro}" method="post"
+			th:action="@{/FiltrarCursos}">
+			<div class="form-group">
+
+				<label>Curso</label> <input type="text" th:field="*{nombreCurso}">
+
+				<button type="submit" class="btn btn-info">Filtrar</button>
+
+
+			</div>
+
+		</form>
+		<div class="cloud-table-scroll">
+
+			<table class="table table-stripped ">
+				<thead>
+					<th>Id</th>
+					<th>Curso</th>
+					<th>Familia Profesional</th>
+					<th>Empleabilidad</th> 
+					<th colspan="3"></th>
+				</thead>
+				<tbody>
+					<tr th:each="curso: ${CursoDTOLista}">
+						<td th:text="${curso.pK_CursoId}"></td>
+						<td th:text="${curso.nombreCurso}"></td>
+						<td th:text="${curso.familiaProfesional}"></td>
+						<td th:text="${curso.empleabilidad}"></td>
+						<td><a class="btn btn-info"
+							th:href="@{/VerDetalleCurso/__${curso.pK_CursoId}__}"
+							role="button">Ver detalle</a></td>
+						<td><a class="btn btn-warning"
+							th:href="@{/EditarCurso/__${curso.pK_CursoId}__}"
+							role="button">Editar</a></td>
+
+						<td><a class="btn btn-danger"
+							th:href="@{/BorrarCurso/__${curso.pK_CursoId}__}"
+							role="button"
+							onclick="return confirm('Confirme que desea eliminarlo')">Eliminar</a></td>
+					</tr>
+				</tbody>
+
+
+
+			</table>
+		</div>
+
+		<br> <a class="btn btn-primary" th:href="@{/NuevoCurso}"
+			role="Button">Nuevo</a>
+
+	</div>
+
+</body>
+</html>
